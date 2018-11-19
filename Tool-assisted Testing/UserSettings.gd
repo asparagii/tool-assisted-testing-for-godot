@@ -1,6 +1,6 @@
 extends Node
 
-var tatSettingsPath = "/root/Main/TATSettings"
+var tatSettingsCustomName = "TATSettings"
 
 var action_table = {
 	"ui_up": 0,
