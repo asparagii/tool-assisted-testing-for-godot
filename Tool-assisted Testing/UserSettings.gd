@@ -1,13 +1,12 @@
 extends Node
 
-#Change this to the name you'd like to give to the TATSettings node.
-#Every TATSettings node will need to be named the same way.
-var tatSettingsCustomName = "TATSettings"
-
+var tatSettingsPath = "/root/Main/TATSettings"
 
 var action_table = {
-	"move_up": 0,
-	"move_down": 1,
-	"move_right": 2,
-	"move_left": 3
+	"ui_up": 0,
+	"ui_down": 1,
+	"ui_right": 2,
+	"ui_left": 3,
+	"jump": 4,
+	"attack": 5
 }

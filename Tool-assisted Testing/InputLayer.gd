@@ -9,12 +9,11 @@ var InputSequence = preload("sequence.gd")
 var sequences = []
 var targets = []
 
-var customname 
 var sceneSettings
 
 func _ready():
-	customname = preload("UserSettings.gd").new().tatSettingsCustomName
-	find_tatsettings_from_(get_tree().current_scene)
+	var customName = preload("UserSettings.gd").new().tatSettingsCustomName
+	sceneSettings = find_node_recursive(get_tree().current_scene, customName)
 	
 	if sceneSettings != null and sceneSettings.mode == sceneSettings.Mode.TEST:
 		for nodepath in sceneSettings.Characters:
@@ -24,17 +23,16 @@ func _ready():
 			sequences.append(sequence)
 			add_child(sequence)
 
-func find_tatsettings_from_(node):
+func find_node_recursive(node, node_name):
 	for N in node.get_children():
-		if N.get_child_count() > 0:
-			if N.get_name() == customname:
-				sceneSettings = N
-			find_tatsettings_from_(N)
+		if N.get_name() == node_name:
+			return N
 		else:
-			#print("-" + N.get_name())
-			if N.get_name() == customname:
-				sceneSettings = N
-			pass
+			if N.get_child_count() > 0:
+				var result = find_node_recursive(N, node_name)
+				if result != null:
+					return result
+	return null
 
 func is_action_pressed(action, caller):
 	if sceneSettings != null and sceneSettings.mode == sceneSettings.Mode.TEST:
