@@ -6,15 +6,9 @@ var pState = 0x0
 var duration = 0.0
 var elapsedTime = 0.0
 
-enum Code {UP, DOWN, LEFT, RIGHT, JUMP, DASH, ATTACK}
+enum {EOF, CONTINUE}
 
-var nametable = {
-	"ui_up": UP,
-	"ui_down": DOWN,
-	"ui_left": LEFT,
-	"ui_right": RIGHT,
-	"jump": JUMP
-}
+onready var nametable = preload("UserSettings.gd").new().action_table
 
 func get_action_code_from(actionName):
 	return nametable[actionName]
@@ -31,8 +25,9 @@ func _process(delta):
 		elapsedTime = 0
 
 func next_state():
-	state = file.get_16()
+	state = file.get_32()
 	duration = file.get_float()
+	return EOF if file.eof_reached() else CONTINUE
 
 func is_action_pressed(action):
 	var code = get_action_code_from(action)

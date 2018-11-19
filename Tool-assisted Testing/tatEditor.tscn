@@ -3,7 +3,7 @@
 [ext_resource path="res://addons/Tool-assisted Testing/tatEditor.gd" type="Script" id=1]
 [ext_resource path="res://addons/Tool-assisted Testing/GridContainer.gd" type="Script" id=2]
 
-[node name="EditorDock" type="VBoxContainer" index="0"]
+[node name="TaT Editor" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -11,20 +11,40 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-alignment = 0
 script = ExtResource( 1 )
+_sections_unfolded = [ "Size Flags" ]
 
-[node name="Header" type="HBoxContainer" parent="." index="0"]
+[node name="Container" type="VBoxContainer" parent="." index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1024.0
+margin_right = 527.0
+margin_bottom = 269.0
+rect_min_size = Vector2( 450, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 0
+_sections_unfolded = [ "Grow Direction", "Rect", "Size Flags", "Theme" ]
+
+[node name="Header" type="HBoxContainer" parent="Container" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 527.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 25 )
 rect_pivot_offset = Vector2( 0, 0 )
@@ -36,7 +56,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="FileName" type="Label" parent="Header" index="0"]
+[node name="FileName" type="Label" parent="Container/Header" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -58,7 +78,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Size Flags" ]
 
-[node name="VSeparator" type="VSeparator" parent="Header" index="1"]
+[node name="VSeparator" type="VSeparator" parent="Container/Header" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -74,7 +94,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="New" type="Button" parent="Header" index="2"]
+[node name="New" type="Button" parent="Container/Header" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -98,7 +118,7 @@ text = "New"
 flat = false
 align = 1
 
-[node name="ChangeFile" type="Button" parent="Header" index="3"]
+[node name="ChangeFile" type="Button" parent="Container/Header" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -123,7 +143,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin" ]
 
-[node name="SaveAs" type="Button" parent="Header" index="4"]
+[node name="SaveAs" type="Button" parent="Container/Header" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -147,14 +167,14 @@ text = "Save as..."
 flat = false
 align = 1
 
-[node name="HSeparator" type="HSeparator" parent="." index="1"]
+[node name="HSeparator" type="HSeparator" parent="Container" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 29.0
-margin_right = 1024.0
+margin_right = 527.0
 margin_bottom = 33.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -163,48 +183,56 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Body" type="Container" parent="." index="2"]
+[node name="Body" type="ScrollContainer" parent="Container" index="2"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 37.0
-margin_right = 1024.0
-margin_bottom = 568.0
+margin_right = 527.0
+margin_bottom = 237.0
+rect_min_size = Vector2( 0, 200 )
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 size_flags_vertical = 3
+scroll_horizontal_enabled = true
+scroll_horizontal = 0
+scroll_vertical_enabled = true
+scroll_vertical = 0
+scroll_deadzone = 0
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="GridContainer" type="GridContainer" parent="Body" index="0"]
+[node name="GridContainer" type="GridContainer" parent="Container/Body" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 322.0
+margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-columns = 1
+columns = 7
 script = ExtResource( 2 )
+_sections_unfolded = [ "Rect" ]
 
-[node name="HSeparator2" type="HSeparator" parent="." index="3"]
+[node name="HSeparator2" type="HSeparator" parent="Container" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 572.0
-margin_right = 1024.0
-margin_bottom = 576.0
+margin_top = 241.0
+margin_right = 527.0
+margin_bottom = 245.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -212,16 +240,16 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Footer" type="HBoxContainer" parent="." index="4"]
+[node name="Footer" type="HBoxContainer" parent="Container" index="4"]
 
 editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 580.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_top = 249.0
+margin_right = 527.0
+margin_bottom = 269.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -231,7 +259,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Anchor" ]
 
-[node name="AppendState" type="Button" parent="Footer" index="0"]
+[node name="AppendState" type="Button" parent="Container/Footer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -255,16 +283,17 @@ text = "Add"
 flat = false
 align = 1
 
-[node name="LoadFileDialog" type="FileDialog" parent="." index="5"]
+[node name="LoadFileDialog" type="FileDialog" parent="." index="1"]
 
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 336.0
-margin_right = 216.0
-margin_bottom = 466.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.0
+margin_top = -65.0
+margin_right = 108.0
+margin_bottom = 65.0
 rect_min_size = Vector2( 200, 70 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -284,25 +313,26 @@ show_hidden_files = false
 current_dir = "res://"
 current_file = ""
 current_path = "res://"
-_sections_unfolded = [ "Dialog", "Popup" ]
+_sections_unfolded = [ "Dialog", "Popup", "Rect" ]
 
-[node name="SaveFileDialog" type="FileDialog" parent="." index="6"]
+[node name="SaveFileDialog" type="FileDialog" parent="." index="2"]
 
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 470.0
-margin_right = 1024.0
-margin_bottom = 600.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -137.5
+margin_top = -65.0
+margin_right = 137.5
+margin_bottom = 65.0
 rect_min_size = Vector2( 200, 70 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
 popup_exclusive = true
 window_title = "Save a File"
 resizable = true
@@ -317,13 +347,13 @@ current_file = ""
 current_path = "res://"
 _sections_unfolded = [ "Popup", "Rect" ]
 
-[connection signal="pressed" from="Header/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="Container/Header/New" to="." method="_on_New_pressed"]
 
-[connection signal="pressed" from="Header/ChangeFile" to="." method="_on_ChangeFile_pressed"]
+[connection signal="pressed" from="Container/Header/ChangeFile" to="." method="_on_ChangeFile_pressed"]
 
-[connection signal="pressed" from="Header/SaveAs" to="." method="_on_SaveAs_pressed"]
+[connection signal="pressed" from="Container/Header/SaveAs" to="." method="_on_SaveAs_pressed"]
 
-[connection signal="pressed" from="Footer/AppendState" to="." method="_on_AppendState_pressed"]
+[connection signal="pressed" from="Container/Footer/AppendState" to="." method="_on_AppendState_pressed"]
 
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_FileDialog_file_selected"]
 

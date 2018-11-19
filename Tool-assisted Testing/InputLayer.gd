@@ -4,30 +4,26 @@ extends Node
 # when dictionaries will be exported without issues
 # but it is not this day
 
-enum Modes {NORMAL, TEST}
-
 var InputSequence = preload("sequence.gd")
-
-export(Array, NodePath) var Targets
-export(Array, String) var SequenceFilePaths
-export(Modes) var Mode
 
 var sequences = []
 var targets = []
 
-func _enter_tree():
-	if Mode != TEST:
-		return
+var sceneSettings
 
-	for nodepath in Targets:
-		targets.append(get_node(nodepath))
-	for path in SequenceFilePaths:
-		var sequence = InputSequence.new(path)
-		sequences.append(sequence)
-		add_child(sequence)
+func _ready():
+	sceneSettings = get_node(preload("UserSettings.gd").new().tatSettingsPath)
+	
+	if sceneSettings != null and sceneSettings.mode == sceneSettings.Mode.TEST:
+		for nodepath in sceneSettings.Characters:
+			targets.append(sceneSettings.get_node(nodepath))
+		for path in sceneSettings.TatFiles:
+			var sequence = InputSequence.new(path)
+			sequences.append(sequence)
+			add_child(sequence)
 
 func is_action_pressed(action, caller):
-	if Mode == TEST:
+	if sceneSettings != null and sceneSettings.mode == sceneSettings.Mode.TEST:
 		var index = targets.find(caller)
 		if index != -1:
 			return sequences[index].is_action_pressed(action)
@@ -35,7 +31,7 @@ func is_action_pressed(action, caller):
 	return Input.is_action_pressed(action)
 
 func is_action_just_pressed(action, caller):
-	if Mode == TEST:
+	if sceneSettings != null and sceneSettings.mode == sceneSettings.Mode.TEST:
 		var index = targets.find(caller)
 		if index != -1:
 			return sequences[index].is_action_just_pressed(action)
