@@ -49,3 +49,10 @@ func is_action_just_pressed(action, caller):
 			return sequences[index].is_action_just_pressed(action)
 	
 	return Input.is_action_just_pressed(action)
+
+func is_action_just_released(action, caller):
+	if sceneSettings != null and sceneSettings.mode == sceneSettings.Mode.TEST:
+		var index = targets.find(caller)
+		if index != -1:
+			return sequences[index].is_action_just_released(action)
+	return Input.is_action_just_released(action)
